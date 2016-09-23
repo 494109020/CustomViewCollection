@@ -2,13 +2,13 @@ package com.customviewcollection.ui;
 
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.customviewcollection.BaseActivity;
 import com.customviewcollection.R;
 import com.customviewcollection.view.CustomTextView;
 
-public class CustomTextViewActivity extends AppCompatActivity {
+public class CustomTextViewActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

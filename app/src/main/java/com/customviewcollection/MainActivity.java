@@ -2,14 +2,15 @@ package com.customviewcollection;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.customviewcollection.ui.CustomTextViewActivity;
+import com.customviewcollection.ui.RxJavaActivity;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private View btn_custom1;
+    private View btn_custom2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +21,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initView() {
         btn_custom1 = findViewById(R.id.btn_custom1);
+        btn_custom2 = findViewById(R.id.btn_custom2);
         btn_custom1.setOnClickListener(this);
+        btn_custom2.setOnClickListener(this);
     }
 
     private void start(Class cla) {
@@ -34,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (id) {
             case R.id.btn_custom1:
                 start(CustomTextViewActivity.class);
+                break;
+            case R.id.btn_custom2:
+                start(RxJavaActivity.class);
                 break;
         }
     }
