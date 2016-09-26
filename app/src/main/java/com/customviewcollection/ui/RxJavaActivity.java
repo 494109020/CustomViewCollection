@@ -65,6 +65,8 @@ public class RxJavaActivity extends BaseActivity {
                         Log.i(TAG, "doOnSubscribe()执行在" + Thread.currentThread().getName());
                     }
                 })
+                //这里是为了搭配doOnSubscribe()方法使用的。
+                // 除此以外,只有第一个subscribeOn()才有效。
                 .subscribeOn(AndroidSchedulers.mainThread())
                 /**
                  * Schedulers.immediate(): 直接在当前线程运行，相当于不指定线程。这是默认的 Scheduler。
@@ -113,7 +115,7 @@ public class RxJavaActivity extends BaseActivity {
                         super.onStart();
                         //onStart()总是在 subscribe 所发生的线程被调用，而不能指定线程。
                         //即: 调用subscribe()方法的线程与onStart()方法执行的线程为同一个线程
-                        //注意此处并不是指observeOn()方法所指定的线程。
+                        //注意此处并不是指subscribeOn()方法所指定的线程。
                         Log.i(TAG, "onStart()执行在" + Thread.currentThread().getName());
                     }
 
