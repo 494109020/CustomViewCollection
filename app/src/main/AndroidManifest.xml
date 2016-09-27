@@ -17,6 +17,7 @@
         </activity>
         <activity android:name=".ui.CustomTextViewActivity"/>
         <activity android:name=".ui.RxJavaActivity"/>
+        <activity android:name=".ui.ShoppingViewActivity"/>
     </application>
 
 </manifest>

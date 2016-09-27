@@ -111,6 +111,8 @@ public class CustomTextView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        //关于文字绘制,可以参考http://blog.csdn.net/aigestudio/article/details/41447349
+
 //        要知道，控件的宽高是这么得来的
 //        getHeight() = mRect.height()+getPaddingTop()+getPaddingBottom();
 //        getWidth() = mRect.width() +getPaddingLeft()+getPaddingRight()
@@ -118,7 +120,7 @@ public class CustomTextView extends View {
         //TextView的文字默认是从左到右，从下到上进行绘制的。
         //当设置了Align之后，Align.LEFT,Align.CENTER,Align.RIGHT分别对应x为文字的开始位置，文本居中位置，文本结束位置。
         float x = getPaddingLeft();
-        //y为文字最下方的位置
+        //y为文字最下方的位置,且不受Align的影响
         float y = getHeight() - getPaddingBottom();
         canvas.drawText(mText, x, y, mPaint);
         //绘制两条辅助线

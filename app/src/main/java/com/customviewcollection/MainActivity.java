@@ -6,11 +6,13 @@ import android.view.View;
 
 import com.customviewcollection.ui.CustomTextViewActivity;
 import com.customviewcollection.ui.RxJavaActivity;
+import com.customviewcollection.ui.ShoppingViewActivity;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private View btn_custom1;
     private View btn_custom2;
+    private View btn_custom3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +24,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private void initView() {
         btn_custom1 = findViewById(R.id.btn_custom1);
         btn_custom2 = findViewById(R.id.btn_custom2);
+        btn_custom3 = findViewById(R.id.btn_custom3);
         btn_custom1.setOnClickListener(this);
         btn_custom2.setOnClickListener(this);
+        btn_custom3.setOnClickListener(this);
     }
 
     private void start(Class cla) {
@@ -40,6 +44,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_custom2:
                 start(RxJavaActivity.class);
+                break;
+            case R.id.btn_custom3:
+                start(ShoppingViewActivity.class);
                 break;
         }
     }
