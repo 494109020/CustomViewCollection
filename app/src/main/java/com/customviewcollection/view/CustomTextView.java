@@ -122,6 +122,8 @@ public class CustomTextView extends View {
         float x = getPaddingLeft();
         //y为文字最下方的位置,且不受Align的影响
         float y = getHeight() - getPaddingBottom();
+        // 计算Baseline绘制的Y坐标
+        int baseY = (int) ((canvas.getHeight() / 2) + ((Math.abs(mPaint.ascent() - Math.abs(mPaint.descent()))) / 2));
         canvas.drawText(mText, x, y, mPaint);
         //绘制两条辅助线
         canvas.drawLine(0, y, getWidth(), y, mPaint);
