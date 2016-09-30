@@ -35,6 +35,12 @@
             android:id="@+id/btn_custom4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="LoadingView"/>
+            android:text="SlackLoadingView"/>
+
+        <Button
+            android:id="@+id/btn_custom5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="BezierLoadingView"/>
     </LinearLayout>
 </ScrollView>

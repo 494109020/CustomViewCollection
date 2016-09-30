@@ -19,6 +19,7 @@
         <activity android:name=".ui.RxJavaActivity"/>
         <activity android:name=".ui.ShoppingViewActivity"/>
         <activity android:name=".ui.LoadingViewActivity"/>
+        <activity android:name=".ui.BezierLoadingViewActivity"/>
     </application>
 
 </manifest>

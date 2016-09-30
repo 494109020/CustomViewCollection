@@ -115,6 +115,7 @@ public class SlackLoadingView extends View {
 
     private void drawLine(Canvas canvas) {
         for (int i = 0; i < 4; i++) {
+            //这里比较操蛋。最好纸上画画,算一下。只要算一条线出来就OK了。其余的靠canvas旋转来实现。
             canvas.drawLine(mWidth / 4, mWidth / 5 * 2, mWidth / 4 + mLineLength, mWidth / 5 * 2, mLinePaint);
             canvas.rotate(90, mWidth / 2, mWidth / 2);
         }
