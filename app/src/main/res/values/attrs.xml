@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="CustomTextView1">
-        <attr name="txtSize" format="dimension" />
-        <attr name="txtColor" format="color" />
-        <attr name="txt" format="string" />
+        <attr name="txtSize" format="dimension"/>
+        <attr name="txtColor" format="color"/>
+        <attr name="txt" format="string"/>
     </declare-styleable>
+
+
+    <declare-styleable name="BezierLoadingView">
+        <attr name="lv_external_radius" format="dimension"></attr>
+        <attr name="lv_internal_radius" format="dimension"></attr>
+        <attr name="lv_duration" format="integer"></attr>
+        <attr name="lv_start_color" format="color"></attr>
+        <attr name="lv_end_color" format="color"></attr>
+    </declare-styleable>
+
 </resources>

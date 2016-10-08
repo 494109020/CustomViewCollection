@@ -66,7 +66,7 @@ public class BezierLoadingView extends View {
         mRadian = 360 / mCircleCount;
 
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStyle(Paint.Style.FILL);
 
         createPoints();
     }
@@ -93,7 +93,6 @@ public class BezierLoadingView extends View {
         super.onDraw(canvas);
         drawCircle(canvas);
         drawBezier(canvas);
-        drawBezier1(canvas);
     }
 
     /**
@@ -123,6 +122,12 @@ public class BezierLoadingView extends View {
         float indexX = mPoints.get(index).x;
         float indexY = mPoints.get(index).y;
 
+        /**
+         *这里其实最好应该取连接两个圆心之后(线段AB),
+         *分别过圆心A,圆心B做垂直于AB的线。得到与外层小圆相交的4个点。
+         *这样出来的贝赛尔才好看。
+         */
+
         //动态圆的离大圆圆心最近点的坐标以及最远点的坐标
         PointF pointF1 = new PointF(getCircleX(mCurrentAngle, mBigRadius - mSmallRadius), getCircleY(mCurrentAngle, mBigRadius - mSmallRadius));
         PointF pointF2 = new PointF(getCircleX(mCurrentAngle, mBigRadius + mSmallRadius), getCircleY(mCurrentAngle, mBigRadius + mSmallRadius));
@@ -132,23 +137,24 @@ public class BezierLoadingView extends View {
 
 //        PointF pointF5 = new PointF(getCircleX((mCurrentAngle + mRadian * index) / 2, mBigRadius), getCircleY((mCurrentAngle + mRadian * index) / 2, mBigRadius));
 
-        //这里是以对方的圆心作为控制点的。但是这样出来效果不够好。
+        //先是分别连接两个最远点以及两个最近点。然后过半之后,才分别连接自身最远点以及最近的点
         mPaint.setColor(Color.BLACK);
         if (isEvenCyclic) {//从有到无
             if (mCurrentAngle % mRadian < mRadian / 2) {
                 //动圆
                 mPath.moveTo(pointF1.x, pointF1.y);
 //                mPath.quadTo(indexX - (currentX - indexX) * ( mCurrentAngle % mRadian) / (mRadian / 2), indexY - (currentY - indexY) * ( mCurrentAngle % mRadian) / (mRadian / 2), pointF2.x, pointF2.y);
-                mPath.quadTo(indexX + (currentX - indexX) * (mCurrentAngle % mRadian) / (mRadian / 2), indexY + (currentY - indexY) * (mCurrentAngle % mRadian) / (mRadian / 2), pointF2.x, pointF2.y);
+                mPath.quadTo(currentX + (indexX - currentX) * (mCurrentAngle % mRadian) / (mRadian / 2), currentY + (indexY - currentY) * (mCurrentAngle % mRadian) / (mRadian / 2), pointF2.x, pointF2.y);
                 mPath.lineTo(pointF1.x, pointF1.y);
                 //定圆
                 mPath.moveTo(pointF4.x, pointF4.y);
 //                mPath.quadTo(currentX - (currentX - indexX) * ( mCurrentAngle % mRadian) / (mRadian / 2), currentY - (currentY - indexY) * (mCurrentAngle % mRadian) / (mRadian / 2), pointF3.x, pointF3.y);
-                mPath.quadTo(currentX + (indexX - currentX) * (mCurrentAngle % mRadian) / (mRadian / 2), currentY + (indexY - currentY) * (mCurrentAngle % mRadian) / (mRadian / 2), pointF3.x, pointF3.y);
+                mPath.quadTo(indexX + (currentX - indexX) * (mCurrentAngle % mRadian) / (mRadian / 2), indexY + (currentY - indexY) * (mCurrentAngle % mRadian) / (mRadian / 2), pointF3.x, pointF3.y);
                 mPath.lineTo(pointF4.x, pointF4.y);
 
                 mPath.close();
                 canvas.drawPath(mPath, mPaint);
+
                 canvas.drawText("1", pointF1.x, pointF1.y, mPaint);
                 canvas.drawPoint(pointF2.x, pointF2.y, mPaint);
                 canvas.drawText("2", pointF2.x, pointF2.y, mPaint);
@@ -179,6 +185,7 @@ public class BezierLoadingView extends View {
 
                 mPath.close();
                 canvas.drawPath(mPath, mPaint);
+
                 canvas.drawText("1", pointF1.x, pointF1.y, mPaint);
                 canvas.drawPoint(pointF2.x, pointF2.y, mPaint);
                 canvas.drawText("2", pointF2.x, pointF2.y, mPaint);
@@ -194,17 +201,16 @@ public class BezierLoadingView extends View {
                 return;
             }
         }
-
+        //这里其实是分别连接两个最远点,两个最近点而成。
         mPath.moveTo(pointF1.x, pointF1.y);
+        mPath.quadTo((currentX + indexX) / 2, (currentY + indexY) / 2, pointF3.x, pointF3.y);
+        mPath.lineTo(pointF4.x, pointF4.y);
         mPath.quadTo((currentX + indexX) / 2, (currentY + indexY) / 2, pointF2.x, pointF2.y);
         mPath.lineTo(pointF1.x, pointF1.y);
 
-        mPath.moveTo(pointF4.x, pointF4.y);
-        mPath.quadTo((currentX + indexX) / 2, (currentY + indexY) / 2, pointF3.x, pointF3.y);
-        mPath.lineTo(pointF4.x, pointF4.y);
-
         mPath.close();
         canvas.drawPath(mPath, mPaint);
+
         canvas.drawText("1", pointF1.x, pointF1.y, mPaint);
         canvas.drawPoint(pointF2.x, pointF2.y, mPaint);
         canvas.drawText("2", pointF2.x, pointF2.y, mPaint);
@@ -219,123 +225,6 @@ public class BezierLoadingView extends View {
 
 
     }
-
-    /**
-     * 绘制贝赛尔曲线
-     *
-     * @param canvas
-     */
-    private void drawBezier1(Canvas canvas) {
-        mPaint.setColor(Color.RED);
-        mPath.reset();
-
-        int circleIndex = mCurrentAngle / mRadian;
-
-        float rightX = getCircleX(mCurrentAngle, mBigRadius);
-        float rightY = getCircleY(mCurrentAngle, mBigRadius);
-
-        float leftX, leftY;
-        if (isEvenCyclic) {
-            int index;
-            index = circleIndex + 1;
-            leftX = mPoints.get(index >= mPoints.size() ? mPoints.size() - 1 : index).x;
-            leftY = mPoints.get(index >= mPoints.size() ? mPoints.size() - 1 : index).y;
-        } else {
-            int index = circleIndex;
-            leftX = mPoints.get(index < 0 ? 0 : index).x;
-            leftY = mPoints.get(index < 0 ? 0 : index).y;
-        }
-
-        double theta = getTheta(new PointF(leftX, leftY), new PointF(rightX, rightY));
-        float sinTheta = (float) Math.sin(theta);
-        float cosTheta = (float) Math.cos(theta);
-
-        PointF pointF1 = new PointF(leftX - mSmallRadius * sinTheta, leftY + mSmallRadius * cosTheta);
-        PointF pointF2 = new PointF(rightX - mSmallRadius * sinTheta, rightY + mSmallRadius * cosTheta);
-        PointF pointF3 = new PointF(rightX + mSmallRadius * sinTheta, rightY - mSmallRadius * cosTheta);
-        PointF pointF4 = new PointF(leftX + mSmallRadius * sinTheta, leftY - mSmallRadius * cosTheta);
-
-        if (isEvenCyclic) {
-            if (mCurrentAngle % mRadian < mRadian / 2) {
-
-                mPath.moveTo(pointF3.x, pointF3.y);
-                mPath.quadTo(rightX + (leftX - rightX) / (mRadian / 2) * (mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : mCurrentAngle % mRadian), rightY + (leftY - rightY) / (mRadian / 2) * (mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : mCurrentAngle % mRadian), pointF2.x, pointF2.y);
-                mPath.lineTo(pointF3.x, pointF3.y);
-
-                mPath.moveTo(pointF4.x, pointF4.y);
-                mPath.quadTo(leftX + (rightX - leftX) / (mRadian / 2) * (mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : mCurrentAngle % mRadian), leftY + (rightY - leftY) / (mRadian / 2) * (mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : mCurrentAngle % mRadian), pointF1.x, pointF1.y);
-                mPath.lineTo(pointF4.x, pointF4.y);
-
-                mPath.close();
-//                canvas.drawPath(mPath, mPaint);
-                ////        canvas.drawPoint(pointF1.x, pointF1.y, mPaint);
-                canvas.drawText("1", pointF1.x, pointF1.y, mPaint);
-                canvas.drawPoint(pointF2.x, pointF2.y, mPaint);
-                canvas.drawText("2", pointF2.x, pointF2.y, mPaint);
-                canvas.drawPoint(pointF3.x, pointF3.y, mPaint);
-                canvas.drawText("3", pointF3.x, pointF3.y, mPaint);
-                canvas.drawPoint(pointF4.x, pointF4.y, mPaint);
-                canvas.drawText("4", pointF4.x, pointF4.y, mPaint);
-                canvas.drawPoint(rightX + (leftX - rightX) / (mRadian / 2) * (mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : mCurrentAngle % mRadian), rightY + (leftY - rightY) / (mRadian / 2) * (mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : mCurrentAngle % mRadian), mPaint);
-                canvas.drawText("5", rightX + (leftX - rightX) / (mRadian / 2) * (mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : mCurrentAngle % mRadian), rightY + (leftY - rightY) / (mRadian / 2) * (mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : mCurrentAngle % mRadian), mPaint);
-                canvas.drawPoint(leftX + (rightX - leftX) / (mRadian / 2) * (mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : mCurrentAngle % mRadian), leftY + (rightY - leftY) / (mRadian / 2) * (mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : mCurrentAngle % mRadian), mPaint);
-                canvas.drawText("6", leftX + (rightX - leftX) / (mRadian / 2) * (mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : mCurrentAngle % mRadian), leftY + (rightY - leftY) / (mRadian / 2) * (mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : mCurrentAngle % mRadian), mPaint);
-                return;
-            }
-        } else {
-            if (circleIndex > 0 && mCurrentAngle % mRadian > mRadian / 2) {
-
-                mPath.moveTo(pointF3.x, pointF3.y);
-                mPath.quadTo(rightX + (leftX - rightX) / (mRadian / 2) * (mRadian - mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : (mRadian - mCurrentAngle % mRadian)), rightY + (leftY - rightY) / (mRadian / 2) * (mRadian - mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : (mRadian - mCurrentAngle % mRadian)), pointF2.x, pointF2.y);
-                mPath.lineTo(pointF3.x, pointF3.y);
-
-                mPath.moveTo(pointF4.x, pointF4.y);
-                mPath.quadTo(leftX + (rightX - leftX) / (mRadian / 2) * (mRadian - mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : (mRadian - mCurrentAngle % mRadian)), leftY + (rightY - leftY) / (mRadian / 2) * (mRadian - mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : (mRadian - mCurrentAngle % mRadian)), pointF1.x, pointF1.y);
-                mPath.lineTo(pointF4.x, pointF4.y);
-
-                mPath.close();
-//                canvas.drawPath(mPath, mPaint);
-                canvas.drawText("1", pointF1.x, pointF1.y, mPaint);
-                canvas.drawPoint(pointF2.x, pointF2.y, mPaint);
-                canvas.drawText("2", pointF2.x, pointF2.y, mPaint);
-                canvas.drawPoint(pointF3.x, pointF3.y, mPaint);
-                canvas.drawText("3", pointF3.x, pointF3.y, mPaint);
-                canvas.drawPoint(pointF4.x, pointF4.y, mPaint);
-                canvas.drawText("4", pointF4.x, pointF4.y, mPaint);
-                canvas.drawPoint(rightX + (leftX - rightX) / (mRadian / 2) * (mRadian - mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : (mRadian - mCurrentAngle % mRadian)), rightY + (leftY - rightY) / (mRadian / 2) * (mRadian - mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : (mRadian - mCurrentAngle % mRadian)), mPaint);
-                canvas.drawText("5", rightX + (leftX - rightX) / (mRadian / 2) * (mRadian - mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : (mRadian - mCurrentAngle % mRadian)), rightY + (leftY - rightY) / (mRadian / 2) * (mRadian - mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : (mRadian - mCurrentAngle % mRadian)), mPaint);
-                canvas.drawPoint(leftX + (rightX - leftX) / (mRadian / 2) * (mRadian - mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : (mRadian - mCurrentAngle % mRadian)), leftY + (rightY - leftY) / (mRadian / 2) * (mRadian - mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : (mRadian - mCurrentAngle % mRadian)), mPaint);
-                canvas.drawText("6", leftX + (rightX - leftX) / (mRadian / 2) * (mRadian - mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : (mRadian - mCurrentAngle % mRadian)), leftY + (rightY - leftY) / (mRadian / 2) * (mRadian - mCurrentAngle % mRadian > (mRadian / 2) ? (mRadian / 2) : (mRadian - mCurrentAngle % mRadian)), mPaint);
-
-                return;
-            }
-        }
-
-        if (circleIndex == 0 && !isEvenCyclic) return;
-
-        mPath.moveTo(pointF1.x, pointF1.y);
-        mPath.quadTo((leftX + rightX) / 2, (leftY + rightY) / 2, pointF2.x, pointF2.y);
-        mPath.lineTo(pointF3.x, pointF3.y);
-        mPath.quadTo((leftX + rightX) / 2, (leftY + rightY) / 2, pointF4.x, pointF4.y);
-        mPath.lineTo(pointF1.x, pointF1.y);
-
-        mPath.close();
-
-//        canvas.drawPath(mPath, mPaint);
-        canvas.drawText("1", pointF1.x, pointF1.y, mPaint);
-        canvas.drawPoint(pointF2.x, pointF2.y, mPaint);
-        canvas.drawText("2", pointF2.x, pointF2.y, mPaint);
-        canvas.drawPoint(pointF3.x, pointF3.y, mPaint);
-        canvas.drawText("3", pointF3.x, pointF3.y, mPaint);
-        canvas.drawPoint(pointF4.x, pointF4.y, mPaint);
-        canvas.drawText("4", pointF4.x, pointF4.y, mPaint);
-        canvas.drawPoint((leftX + rightX) / 2, (leftY + rightY) / 2, mPaint);
-        canvas.drawText("5", (leftX + rightX) / 2, (leftY + rightY) / 2, mPaint);
-        canvas.drawPoint((leftX + rightX) / 2, (leftY + rightY) / 2, mPaint);
-        canvas.drawText("6", (leftX + rightX) / 2, (leftY + rightY) / 2, mPaint);
-
-    }
-
 
     /**
      * 获取theta值
