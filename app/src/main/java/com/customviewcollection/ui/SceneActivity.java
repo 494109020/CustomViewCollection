@@ -73,7 +73,6 @@ public class SceneActivity extends BaseActivity {
 //                        TransitionManager.go(scene1, transition);
 //                        startActivityWithShareElement();
                         startActivityWithShareElements();
-
                     }
                 });
                 Log.i(TAG, "Scene2进入了");

@@ -18,18 +18,18 @@
         android:transitionName="transitionName1"/>
 
 
-    <ImageView
+    <View
         android:id="@+id/img2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal|right|bottom"
-        android:src="@mipmap/ic_launcher"/>
+        android:background="#00ff00"/>
 
-    <ImageView
+    <View
         android:id="@+id/img3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="center_vertical|left|bottom"
-        android:src="@mipmap/ic_launcher"/>
+        android:background="#0000ff"/>
 
 </FrameLayout>

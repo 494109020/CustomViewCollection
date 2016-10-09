@@ -3,7 +3,7 @@ package com.customviewcollection.ui;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.View;
+import android.widget.TextView;
 
 import com.customviewcollection.BaseActivity;
 
@@ -22,11 +22,14 @@ import rx.schedulers.Schedulers;
 public class RxJavaActivity extends BaseActivity {
 
     private static final String TAG = "RxJava";
+    private TextView textView;
+    private StringBuilder sb;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(new View(this));
+        textView = new TextView(this);
+        setContentView(textView);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -34,6 +37,7 @@ public class RxJavaActivity extends BaseActivity {
             }
         }).start();
 //        test();
+        sb = new StringBuilder();
     }
 
     public void test() {
@@ -42,6 +46,8 @@ public class RxJavaActivity extends BaseActivity {
             @Override
             public void call(Subscriber<? super String> subscriber) {
                 Log.i(TAG, "call()执行在" + Thread.currentThread().getName());
+                sb.append("call()执行在").append(Thread.currentThread().getName()).append("\r\n");
+                textView.setText(sb.toString());
                 //call()方法执行的线程为subscribeOn()方法所指定的线程。
                 //此处注意:onStart()方法执行的线程与subscribeOn()方法指定的线程没有关系。
                 //也就是说可能和call()执行的线程不是同一个。详细看onStart()方法的注释说明。
@@ -63,6 +69,8 @@ public class RxJavaActivity extends BaseActivity {
                     @Override
                     public void call() {
                         Log.i(TAG, "doOnSubscribe()执行在" + Thread.currentThread().getName());
+                        sb.append("doOnSubscribe()执行在").append(Thread.currentThread().getName()).append("\r\n");
+                        textView.setText(sb.toString());
                     }
                 })
                 //这里是为了搭配doOnSubscribe()方法使用的。
@@ -117,10 +125,15 @@ public class RxJavaActivity extends BaseActivity {
                         //即: 调用subscribe()方法的线程与onStart()方法执行的线程为同一个线程
                         //注意此处并不是指subscribeOn()方法所指定的线程。
                         Log.i(TAG, "onStart()执行在" + Thread.currentThread().getName());
+                        sb.append("onStart()执行在").append(Thread.currentThread().getName()).append("\r\n");
+                        textView.setText(sb.toString());
                     }
 
                     @Override
                     public void onCompleted() {
+                        sb.append("onCompleted()执行在").append(Thread.currentThread().getName()).append("\r\n");
+                        textView.setText(sb.toString());
+
                         Log.i(TAG, "onCompleted()执行在" + Thread.currentThread().getName());
                     }
 
@@ -132,6 +145,10 @@ public class RxJavaActivity extends BaseActivity {
                     @Override
                     public void onNext(String s) {
                         Log.i(TAG, "onNext()执行在" + Thread.currentThread().getName());
+
+                        sb.append("onNext()执行在").append(Thread.currentThread().getName()).append("\r\n");
+                        textView.setText(sb.toString());
+
                     }
                 });
         /**

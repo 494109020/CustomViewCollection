@@ -2,6 +2,8 @@ package com.customviewcollection.ui;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
+import android.transition.Transition;
+import android.widget.Toast;
 
 import com.customviewcollection.BaseActivity;
 import com.customviewcollection.R;
@@ -23,6 +25,34 @@ public class SecondSceneActivity extends BaseActivity {
         //其中,有一个是通过xml配置的
         ViewCompat.setTransitionName(findViewById(R.id.img2), "transitionName2");
         ViewCompat.setTransitionName(findViewById(R.id.img3), "transitionName3");
+
+        Transition transition = getWindow().getSharedElementEnterTransition();
+        transition.addListener(new Transition.TransitionListener() {
+            @Override
+            public void onTransitionStart(Transition transition) {
+
+            }
+
+            @Override
+            public void onTransitionEnd(Transition transition) {
+                Toast.makeText(SecondSceneActivity.this, "transition结束了", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onTransitionCancel(Transition transition) {
+
+            }
+
+            @Override
+            public void onTransitionPause(Transition transition) {
+
+            }
+
+            @Override
+            public void onTransitionResume(Transition transition) {
+
+            }
+        });
 
     }
 }
