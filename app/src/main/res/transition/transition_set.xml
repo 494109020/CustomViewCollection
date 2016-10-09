@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
+    <fade
+        android:duration="@integer/anim_duration"
+        android:fadingMode="fade_in"/>
+
+    <!--大小改变-->
+    <changeBounds android:duration="@integer/anim_duration"/>
+
+    <fade
+        android:duration="@integer/anim_duration"
+        android:fadingMode="fade_out"/>
+
+    <!--这个是侧滑,slideEdge代表的是侧滑的方向,如left,代表的从左侧出入-->
+    <slide
+        android:duration="@integer/anim_duration"
+        android:slideEdge="left">
+        <!--<targets android:excludeId=""-->
+    </slide>
+
+    <!--这个是重新着色-->
+    <recolor/>
+
+    <!--这个是爆炸效果-->
+    <explode/>
+
+</transitionSet>

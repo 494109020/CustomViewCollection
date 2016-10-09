@@ -20,6 +20,8 @@
         <activity android:name=".ui.ShoppingViewActivity"/>
         <activity android:name=".ui.LoadingViewActivity"/>
         <activity android:name=".ui.BezierLoadingViewActivity"/>
+        <activity android:name=".ui.SceneActivity"/>
+        <activity android:name=".ui.SecondSceneActivity"/>
     </application>
 
 </manifest>
