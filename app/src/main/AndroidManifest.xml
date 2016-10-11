@@ -22,6 +22,7 @@
         <activity android:name=".ui.BezierLoadingViewActivity"/>
         <activity android:name=".ui.SceneActivity"/>
         <activity android:name=".ui.SecondSceneActivity"/>
+        <activity android:name=".ui.DynamicProxyActivity"/>
     </application>
 
 </manifest>
