@@ -11,6 +11,7 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -38,6 +39,7 @@ public class RxJavaActivity extends BaseActivity {
         }).start();
 //        test();
         sb = new StringBuilder();
+        change();
     }
 
     public void test() {
@@ -60,7 +62,7 @@ public class RxJavaActivity extends BaseActivity {
         })
                 //subscribeOn(): 指定 subscribe() 所发生的线程，即 Observable.OnSubscribe 被激活时所处的线程。或者叫做事件产生的线程。
                 //subscribeOn() 的位置放在哪里都可以，但它是只能调用一次的。
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
 
                 //默认情况下， doOnSubscribe() 执行在 subscribe() 发生的线程；
                 // 而如果在 doOnSubscribe() 之后有 subscribeOn() 的话，
@@ -165,6 +167,74 @@ public class RxJavaActivity extends BaseActivity {
          * OnSubscribe.call(Subscriber)这个方法是在subscribe()方法执行的时候开始执行的。
          * 具体可查看源码
          */
+    }
 
+    /**
+     * 关于RxJava中转换的使用。
+     * 个人发现:
+     * 1.map适用于普通的数据结构(包含自定义的javaBean)互相转换
+     * 2.flatMap适用于正常的数据结构(包含自定义的javaBean)转换为Observable对象。
+     * 需要注意的是:map中返回的对象会被发送到Subscriber中。而flatMap中返回的是一个Observable对象,
+     * 它会将该事件激活并发送
+     * 3.compose适用于Observable对象的互相转换。
+     */
+    public void change() {
+        //Func1接口中,第一个泛型代表入参类型,第二个泛型代表出参类型。数字1代表着入参只有1个,1种
+        //与Action1接口不同的是,Func1是有返回值类型的,而Action1是没有返回值类型的。
+        //Action1的泛型代表call()方法的参数类型。
+//        Observable.just(1, 2, 3, 4).map(new Func1<Integer, String>() {
+//            @Override
+//            public String call(Integer integer) {
+//                return String.valueOf(integer);
+//            }
+//        }).subscribe(new Action1<String>() {
+//            @Override
+//            public void call(String s) {
+//                Log.i(TAG, s);
+//            }
+//        });
+
+        Observable.just(1, 2, 3, 4, 5, 6).flatMap(new Func1<Integer, Observable<String>>() {
+            @Override
+            public Observable<String> call(final Integer integer) {
+                return Observable.create(new Observable.OnSubscribe<String>() {
+                    @Override
+                    public void call(Subscriber<? super String> subscriber) {
+                        subscriber.onNext(integer + "");
+                    }
+                });
+            }
+        })
+                //筛选操作符号
+                .filter(new Func1<String, Boolean>() {
+                    @Override
+                    public Boolean call(String s) {
+                        //返回true则代表这个数据可以继续发送，否则，该数据被拦截
+                        return s.length() > 0;
+                    }
+                })
+                //只取前两个
+                .take(4)
+                .map(new Func1<String, Integer>() {
+                    @Override
+                    public Integer call(String s) {
+                        return Integer.parseInt(s);
+                    }
+                }).subscribe(new Subscriber<Integer>() {
+            @Override
+            public void onCompleted() {
+                Log.i(TAG, "onCompleted");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.i(TAG, "onError");
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                Log.i(TAG, "onNext:" + integer);
+            }
+        });
     }
 }
