@@ -50,6 +50,9 @@ public class ShoppingView extends View {
     private PointF mCenterPoint;//圆心
     private OnNumberChangeListener mListener;
 
+    //防止在动画交替过程中触发点击事件
+    private boolean isClickEnable = true;
+
     //是否要显示文本。没有加减号的模式
     private boolean isShowText = true;
     private static final int DURATION = 1000;
@@ -138,39 +141,41 @@ public class ShoppingView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        mPoint.set(event.getX(), event.getY());
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                if (mState == STATE_NUMBER) {
-                    //减号
-                    mCenterPoint.set(mHeight / 2, mHeight / 2);
-                    if (isPointInCircle(mPoint, mCenterPoint)) {
-                        if (mNum > 1) {
-                            mNum--;
+        if (isClickEnable) {
+            mPoint.set(event.getX(), event.getY());
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    if (mState == STATE_NUMBER) {
+                        //减号
+                        mCenterPoint.set(mHeight / 2, mHeight / 2);
+                        if (isPointInCircle(mPoint, mCenterPoint)) {
+                            if (mNum > 1) {
+                                mNum--;
+                                invalidate();
+                                if (mListener != null)
+                                    mListener.minus(mNum);
+                            } else {
+                                isShowText = true;
+                                startRotateAnimator();
+                                if (mListener != null)
+                                    mListener.minus(0);
+                            }
+                        }
+                        //加号
+                        mCenterPoint.set(mWidth - mHeight / 2, mHeight / 2);
+                        if (isPointInCircle(mPoint, mCenterPoint)) {
+                            mNum++;
                             invalidate();
-                            if (mListener != null)
-                                mListener.minus(mNum);
-                        } else {
-                            isShowText = true;
-                            startRotateAnimator();
-                            if (mListener != null)
-                                mListener.minus(0);
+                            if (mListener != null) {
+                                mListener.add(mNum);
+                            }
                         }
+                    } else if (mState == STATE_TEXT) {
+                        isShowText = false;
+                        startRoundRectChange();
                     }
-                    //加号
-                    mCenterPoint.set(mWidth - mHeight / 2, mHeight / 2);
-                    if (isPointInCircle(mPoint, mCenterPoint)) {
-                        mNum++;
-                        invalidate();
-                        if (mListener != null) {
-                            mListener.add(mNum);
-                        }
-                    }
-                } else if (mState == STATE_TEXT) {
-                    isShowText = false;
-                    startRoundRectChange();
-                }
-                break;
+                    break;
+            }
         }
 
         return super.onTouchEvent(event);
@@ -254,6 +259,7 @@ public class ShoppingView extends View {
                 mCurrentWidth = (Integer) animation.getAnimatedValue();
                 if (isShowText && mCurrentWidth == mWidth - mHeight) {
                     mState = STATE_TEXT;
+                    isClickEnable = true;
                 } else if (!isShowText && mCurrentWidth == 0) {
                     //如果是要展示数字,则此时开启旋转的绘画
                     startRotateAnimator();
@@ -262,6 +268,7 @@ public class ShoppingView extends View {
             }
         });
         animator.start();
+        isClickEnable = false;
     }
 
 
@@ -285,6 +292,8 @@ public class ShoppingView extends View {
                 mAngle = (Integer) animation.getAnimatedValue();
                 if (isShowText && mAngle == 360) {
                     startRoundRectChange();
+                } else if (!isShowText && mAngle == 0) {
+                    isClickEnable = true;
                 }
                 invalidate();
             }
@@ -301,6 +310,7 @@ public class ShoppingView extends View {
         animatorSet.setDuration(DURATION);
         animatorSet.playTogether(angleAnimator, xPositionAnimator);
         animatorSet.start();
+        isClickEnable = false;
     }
 
 
