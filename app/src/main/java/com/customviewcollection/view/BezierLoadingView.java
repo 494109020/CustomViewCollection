@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
+import rx.Subscription;
 import rx.functions.Action1;
 
 /**
@@ -40,6 +41,7 @@ public class BezierLoadingView extends View {
     private int mRadian;//两点间的角度
 
     private boolean isEvenCyclic;//是否是偶数圈
+    private Subscription subscription;
 
     public BezierLoadingView(Context context) {
         super(context);
@@ -333,7 +335,7 @@ public class BezierLoadingView extends View {
      */
     public void start() {
         //这个是RxJava中的循环器。每隔多长时间执行一次。
-        Observable.interval(100, TimeUnit.MILLISECONDS)
+        subscription = Observable.interval(100, TimeUnit.MILLISECONDS)
                 .subscribe(new Action1<Long>() {
                     @Override
                     public void call(Long aLong) {
@@ -347,4 +349,12 @@ public class BezierLoadingView extends View {
                 });
     }
 
+    //此处记得要解除注册，否则会导致内存泄漏
+    @Override
+    protected void onDetachedFromWindow() {
+        if (subscription != null && !subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
+        }
+        super.onDetachedFromWindow();
+    }
 }
