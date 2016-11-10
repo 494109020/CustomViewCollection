@@ -17,7 +17,7 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //严苛模式,性能优化使用
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites()
-                .detectNetwork()
+                .detectAll()
                 .penaltyLog().build());
         StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects()
                 .detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());

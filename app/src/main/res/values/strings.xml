@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CustomViewCollection</string>
+    <string name="scheme">magina</string>
 </resources>
