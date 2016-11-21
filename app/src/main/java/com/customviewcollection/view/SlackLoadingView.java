@@ -245,4 +245,10 @@ public class SlackLoadingView extends View {
         }
         reset();
     }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        stop();
+        super.onDetachedFromWindow();
+    }
 }

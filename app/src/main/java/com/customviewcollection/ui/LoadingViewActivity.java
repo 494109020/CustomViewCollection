@@ -18,12 +18,13 @@ public class LoadingViewActivity extends BaseActivity {
     private static final String TAG = "LoadingView";
 
     private boolean flag = true;
+    private SlackLoadingView sv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading_view);
-        final SlackLoadingView sv = (SlackLoadingView) findViewById(R.id.sv);
+        sv = (SlackLoadingView) findViewById(R.id.sv);
         final Button btn = (Button) findViewById(R.id.btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,5 +42,9 @@ public class LoadingViewActivity extends BaseActivity {
 
     }
 
-
+    @Override
+    protected void onDestroy() {
+        sv.stop();
+        super.onDestroy();
+    }
 }

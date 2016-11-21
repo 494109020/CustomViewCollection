@@ -352,9 +352,14 @@ public class BezierLoadingView extends View {
     //此处记得要解除注册，否则会导致内存泄漏
     @Override
     protected void onDetachedFromWindow() {
+        stop();
+        super.onDetachedFromWindow();
+    }
+
+    public void stop() {
         if (subscription != null && !subscription.isUnsubscribed()) {
             subscription.unsubscribe();
         }
-        super.onDetachedFromWindow();
     }
+
 }

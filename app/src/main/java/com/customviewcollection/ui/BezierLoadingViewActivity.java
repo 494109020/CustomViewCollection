@@ -14,14 +14,19 @@ import com.customviewcollection.view.BezierLoadingView;
 public class BezierLoadingViewActivity extends BaseActivity {
 
     private static final String TAG = "BezierLoadingView";
+    private BezierLoadingView bv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bezierloading_view);
-        BezierLoadingView bv = (BezierLoadingView) findViewById(R.id.bv);
+        bv = (BezierLoadingView) findViewById(R.id.bv);
         bv.start();
     }
 
-
+    @Override
+    protected void onDestroy() {
+        bv.stop();
+        super.onDestroy();
+    }
 }
