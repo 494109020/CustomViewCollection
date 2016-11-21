@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">CustomViewCollection</string>
     <string name="scheme">magina</string>
+    <string name="widget">桌面小组件</string>
 </resources>
