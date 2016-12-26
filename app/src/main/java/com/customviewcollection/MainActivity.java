@@ -8,6 +8,7 @@ import com.customviewcollection.ui.BezierLoadingViewActivity;
 import com.customviewcollection.ui.CustomTextViewActivity;
 import com.customviewcollection.ui.DynamicProxyActivity;
 import com.customviewcollection.ui.LoadingViewActivity;
+import com.customviewcollection.ui.MatrixActivity;
 import com.customviewcollection.ui.RxJavaActivity;
 import com.customviewcollection.ui.SceneActivity;
 import com.customviewcollection.ui.ShoppingViewActivity;
@@ -16,7 +17,8 @@ import com.customviewcollection.ui.WebCallAppActivity1;
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private View btn_custom1, btn_custom2, btn_custom3,
-            btn_custom4, btn_custom5, btn_custom6, btn_custom7, btn_custom8;
+            btn_custom4, btn_custom5, btn_custom6, btn_custom7, btn_custom8,
+            btn_custom9;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btn_custom6 = findViewById(R.id.btn_custom6);
         btn_custom7 = findViewById(R.id.btn_custom7);
         btn_custom8 = findViewById(R.id.btn_custom8);
+        btn_custom9 = findViewById(R.id.btn_custom9);
         btn_custom1.setOnClickListener(this);
         btn_custom2.setOnClickListener(this);
         btn_custom3.setOnClickListener(this);
@@ -42,6 +45,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btn_custom6.setOnClickListener(this);
         btn_custom7.setOnClickListener(this);
         btn_custom8.setOnClickListener(this);
+        btn_custom9.setOnClickListener(this);
     }
 
     private void start(Class cla) {
@@ -76,6 +80,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_custom8:
                 start(WebCallAppActivity1.class);
+                break;
+            case R.id.btn_custom9:
+                start(MatrixActivity.class);
                 break;
         }
     }

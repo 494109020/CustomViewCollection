@@ -28,6 +28,7 @@
         <activity android:name=".ui.SecondSceneActivity"/>
         <activity android:name=".ui.DynamicProxyActivity"/>
         <activity android:name=".ui.WebCallAppActivity1"/>
+        <activity android:name=".ui.MatrixActivity"/>
 
         <activity android:name=".ui.WebCallAppActivity2">
             <intent-filter>

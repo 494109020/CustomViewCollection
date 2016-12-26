@@ -54,23 +54,23 @@ public class DesktopWidget extends AppWidgetProvider {
     /**
      * 每次桌面小组件更新都会调用的方法。系统回调。
      * 更新时间由res/xml 下的资源文件指定。该资源文件会在AndroidManifest中指定
-     * 注意：SDK1.5之后此android:updatePeriodMillis就失效了，要自己创建service更新
+     * 注意：android:updatePeriodMillis最低30分钟
      *
      * @param context
      * @param appWidgetManager
-     * @param appWidgetIds
+     * @param appWidgetIds     这个应该是widget对应的id。而不是布局文件中的id。
      */
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
         Log.i(TAG, "onUpdate()");
 
-        if (appWidgetIds != null && appWidgetIds.length > 0) {
-            for (int appWidgetId : appWidgetIds) {
-                // 这么搞貌似不行呢。最好还是直接利用xml中声明的id来做处理吧。
-                onWidgetUpdate(context, appWidgetManager, appWidgetId);
-            }
-        }
+//        if (appWidgetIds != null && appWidgetIds.length > 0) {
+//            for (int appWidgetId : appWidgetIds) {
+//                // 这么搞貌似不行呢。最好还是直接利用xml中声明的id来做处理吧。
+//                onWidgetUpdate(context, appWidgetManager, appWidgetId);
+//            }
+//        }
     }
 
     private void onWidgetUpdate(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {

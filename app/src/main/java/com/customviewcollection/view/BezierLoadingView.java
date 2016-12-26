@@ -68,7 +68,7 @@ public class BezierLoadingView extends View {
         mRadian = 360 / mCircleCount;
 
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setStyle(Paint.Style.STROKE);
 
         createPoints();
     }
@@ -78,10 +78,6 @@ public class BezierLoadingView extends View {
         for (int i = 0; i < mCircleCount; i++) {
             mPoints.add(new PointF(getCircleX(360 / mCircleCount * i, mBigRadius), getCircleY(360 / mCircleCount * i, mBigRadius)));
         }
-    }
-
-    private void ads() {
-        mCurrentAngle++;
     }
 
     @Override
@@ -127,15 +123,20 @@ public class BezierLoadingView extends View {
         /**
          *这里其实最好应该取连接两个圆心之后(线段AB),
          *分别过圆心A,圆心B做垂直于AB的线。得到与外层小圆相交的4个点。
+         *通俗点说，就是求两个圆的外切线
          *这样出来的贝赛尔才好看。
          */
 
-        //动态圆的离大圆圆心最近点的坐标以及最远点的坐标
-        PointF pointF1 = new PointF(getCircleX(mCurrentAngle, mBigRadius - mSmallRadius), getCircleY(mCurrentAngle, mBigRadius - mSmallRadius));
-        PointF pointF2 = new PointF(getCircleX(mCurrentAngle, mBigRadius + mSmallRadius), getCircleY(mCurrentAngle, mBigRadius + mSmallRadius));
+        double theta = getTheta(currentX, currentY, indexX, indexY);
+        float sin = (float) Math.sin(theta);
+        float cos = (float) Math.cos(theta);
+
+        //动态圆的离大圆圆心最近点的坐标以及最远点的坐标  为什么全都是一个加，一个减。。。。。不懂。根据坐标系来看，有时候应该都加或者都减
+        PointF pointF1 = new PointF(currentX + mSmallRadius * sin, currentY - mSmallRadius * cos);
+        PointF pointF2 = new PointF(currentX - mSmallRadius * sin, currentY + mSmallRadius * cos);
         //目标圆的离大圆圆心最近点的坐标以及最远点的坐标
-        PointF pointF3 = new PointF(getCircleX(mRadian * index, mBigRadius - mSmallRadius), getCircleY(mRadian * index, mBigRadius - mSmallRadius));
-        PointF pointF4 = new PointF(getCircleX(mRadian * index, mBigRadius + mSmallRadius), getCircleY(mRadian * index, mBigRadius + mSmallRadius));
+        PointF pointF3 = new PointF(indexX + mSmallRadius * sin, indexY - mSmallRadius * cos);
+        PointF pointF4 = new PointF(indexX - mSmallRadius * sin, indexY + mSmallRadius * cos);
 
 //        PointF pointF5 = new PointF(getCircleX((mCurrentAngle + mRadian * index) / 2, mBigRadius), getCircleY((mCurrentAngle + mRadian * index) / 2, mBigRadius));
 
@@ -230,13 +231,9 @@ public class BezierLoadingView extends View {
 
     /**
      * 获取theta值
-     *
-     * @param pointCenterLeft
-     * @param pointCenterRight
-     * @return
      */
-    private double getTheta(PointF pointCenterLeft, PointF pointCenterRight) {
-        double theta = Math.atan((pointCenterRight.y - pointCenterLeft.y) / (pointCenterRight.x - pointCenterLeft.x));
+    private double getTheta(float rightX, float rightY, float leftX, float leftY) {
+        double theta = Math.atan((rightY - leftY) / (rightX - leftX));
         return theta;
     }
 
@@ -335,7 +332,7 @@ public class BezierLoadingView extends View {
      */
     public void start() {
         //这个是RxJava中的循环器。每隔多长时间执行一次。
-        subscription = Observable.interval(100, TimeUnit.MILLISECONDS)
+        subscription = Observable.interval(50, TimeUnit.MILLISECONDS)
                 .subscribe(new Action1<Long>() {
                     @Override
                     public void call(Long aLong) {

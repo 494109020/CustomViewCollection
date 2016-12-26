@@ -60,5 +60,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="网页调起app"/>
+
+        <Button
+            android:id="@+id/btn_custom9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Matrix学习"/>
     </LinearLayout>
 </ScrollView>
