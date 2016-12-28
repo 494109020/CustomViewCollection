@@ -11,6 +11,31 @@
 
     <FrameLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_none"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NONE" />
+
+        <Button
+            android:id="@+id/btn_hardware"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="HARDWARE" />
+
+        <Button
+            android:id="@+id/btn_software"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="SOFTWARE" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -64,6 +89,25 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:text="SpreR" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="clipOpen" />
+
+        <Button
+            android:id="@+id/btn_8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="clipClose" />
     </FrameLayout>
 
     <com.customviewcollection.view.MatrixView

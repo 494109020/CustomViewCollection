@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.customviewcollection">
+    package="com.customviewcollection">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".App"
@@ -14,36 +14,33 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.CustomTextViewActivity"/>
-        <activity android:name=".ui.RxJavaActivity"/>
-        <activity android:name=".ui.ShoppingViewActivity"/>
-        <activity android:name=".ui.LoadingViewActivity"/>
-        <activity android:name=".ui.BezierLoadingViewActivity"/>
-        <activity android:name=".ui.SceneActivity"/>
-        <activity android:name=".ui.SecondSceneActivity"/>
-        <activity android:name=".ui.DynamicProxyActivity"/>
-        <activity android:name=".ui.WebCallAppActivity1"/>
-        <activity android:name=".ui.MatrixActivity"/>
+        <activity android:name=".ui.CustomTextViewActivity" />
+        <activity android:name=".ui.RxJavaActivity" />
+        <activity android:name=".ui.ShoppingViewActivity" />
+        <activity android:name=".ui.LoadingViewActivity" />
+        <activity android:name=".ui.BezierLoadingViewActivity" />
+        <activity android:name=".ui.SceneActivity" />
+        <activity android:name=".ui.SecondSceneActivity" />
+        <activity android:name=".ui.DynamicProxyActivity" />
+        <activity android:name=".ui.WebCallAppActivity1" />
+        <activity android:name=".ui.MatrixActivity" />
+        <activity android:name=".ui.PieViewActivity" />
 
         <activity android:name=".ui.WebCallAppActivity2">
             <intent-filter>
 
-                <action
-                    android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
 
-                <category
-                    android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
 
-                <category
-                    android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:scheme="@string/scheme"/>
+                <data android:scheme="@string/scheme" />
             </intent-filter>
         </activity>
 
@@ -52,12 +49,12 @@
             <!--这个是桌面小组件的配置文件-->
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_provider_info"/>
+                android:resource="@xml/widget_provider_info" />
 
             <intent-filter>
-                <action android:name="com.customviewcollection.action.CLICK"/>
+                <action android:name="com.customviewcollection.action.CLICK" />
                 <!--以下这个action是作为桌面小组件必须有的。否则小组件不会出现在列表中-->
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
         </receiver>
 
