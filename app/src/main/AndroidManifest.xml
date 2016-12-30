@@ -31,6 +31,7 @@
         <activity android:name=".ui.MatrixActivity" />
         <activity android:name=".ui.PieViewActivity" />
         <activity android:name=".ui.RotateArrowActivity" />
+        <activity android:name=".ui.SearchViewActivity" />
         <activity
             android:name=".ui.PathFillActivity"
             android:hardwareAccelerated="false" />

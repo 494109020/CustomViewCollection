@@ -90,5 +90,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="旋转的箭头" />
+
+        <Button
+            android:id="@+id/btn_custom14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SearchView" />
     </LinearLayout>
 </ScrollView>

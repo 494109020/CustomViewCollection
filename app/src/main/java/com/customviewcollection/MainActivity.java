@@ -15,6 +15,7 @@ import com.customviewcollection.ui.PieViewActivity;
 import com.customviewcollection.ui.RotateArrowActivity;
 import com.customviewcollection.ui.RxJavaActivity;
 import com.customviewcollection.ui.SceneActivity;
+import com.customviewcollection.ui.SearchViewActivity;
 import com.customviewcollection.ui.ShoppingViewActivity;
 import com.customviewcollection.ui.WebCallAppActivity1;
 
@@ -22,7 +23,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private View btn_custom1, btn_custom2, btn_custom3,
             btn_custom4, btn_custom5, btn_custom6, btn_custom7, btn_custom8,
-            btn_custom9, btn_custom10, btn_custom11, btn_custom12, btn_custom13;
+            btn_custom9, btn_custom10, btn_custom11, btn_custom12, btn_custom13, btn_custom14;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btn_custom11 = findViewById(R.id.btn_custom11);
         btn_custom12 = findViewById(R.id.btn_custom12);
         btn_custom13 = findViewById(R.id.btn_custom13);
+        btn_custom14 = findViewById(R.id.btn_custom14);
         btn_custom1.setOnClickListener(this);
         btn_custom2.setOnClickListener(this);
         btn_custom3.setOnClickListener(this);
@@ -58,6 +60,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btn_custom11.setOnClickListener(this);
         btn_custom12.setOnClickListener(this);
         btn_custom13.setOnClickListener(this);
+        btn_custom14.setOnClickListener(this);
     }
 
     private void start(Class cla) {
@@ -107,6 +110,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_custom13:
                 start(RotateArrowActivity.class);
+                break;
+            case R.id.btn_custom14:
+                start(SearchViewActivity.class);
                 break;
         }
     }
