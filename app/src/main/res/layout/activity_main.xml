@@ -72,5 +72,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="画饼图" />
+
+        <Button
+            android:id="@+id/btn_custom11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Path填充规则学习" />
+
+        <Button
+            android:id="@+id/btn_custom12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Path的OP操作学习" />
     </LinearLayout>
 </ScrollView>

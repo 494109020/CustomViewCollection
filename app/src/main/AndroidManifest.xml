@@ -30,6 +30,10 @@
         <activity android:name=".ui.WebCallAppActivity1" />
         <activity android:name=".ui.MatrixActivity" />
         <activity android:name=".ui.PieViewActivity" />
+        <activity
+            android:name=".ui.PathFillActivity"
+            android:hardwareAccelerated="false" />
+        <activity android:name=".ui.PathOPActivity" />
 
         <activity android:name=".ui.WebCallAppActivity2">
             <intent-filter>

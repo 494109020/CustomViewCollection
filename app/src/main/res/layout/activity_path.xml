@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_even_odd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="奇偶规则" />
+
+        <Button
+            android:id="@+id/btn_inverse_even_odd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="反奇偶规则" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_winding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="非零规则" />
+
+        <Button
+            android:id="@+id/btn_inverse_winding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="反非零规则" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_inner_cw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="内顺" />
+
+        <Button
+            android:id="@+id/btn_inner_ccw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="内逆" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_outer_cw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="外顺" />
+
+        <Button
+            android:id="@+id/btn_outer_ccw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="外逆" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" />
+
+    <com.customviewcollection.view.PathView
+        android:id="@+id/pv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
