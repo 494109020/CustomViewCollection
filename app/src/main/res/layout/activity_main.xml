@@ -84,5 +84,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Path的OP操作学习" />
+
+        <Button
+            android:id="@+id/btn_custom13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="旋转的箭头" />
     </LinearLayout>
 </ScrollView>

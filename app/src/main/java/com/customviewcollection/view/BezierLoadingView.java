@@ -132,6 +132,7 @@ public class BezierLoadingView extends View {
         float cos = (float) Math.cos(theta);
 
         //动态圆的离大圆圆心最近点的坐标以及最远点的坐标  为什么全都是一个加，一个减。。。。。不懂。根据坐标系来看，有时候应该都加或者都减
+        // 明白了。上面求得的theta可能是负值。 Math.sin(-theta) = -Math.sin(theta);
         PointF pointF1 = new PointF(currentX + mSmallRadius * sin, currentY - mSmallRadius * cos);
         PointF pointF2 = new PointF(currentX - mSmallRadius * sin, currentY + mSmallRadius * cos);
         //目标圆的离大圆圆心最近点的坐标以及最远点的坐标

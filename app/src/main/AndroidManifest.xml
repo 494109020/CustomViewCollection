@@ -30,18 +30,16 @@
         <activity android:name=".ui.WebCallAppActivity1" />
         <activity android:name=".ui.MatrixActivity" />
         <activity android:name=".ui.PieViewActivity" />
+        <activity android:name=".ui.RotateArrowActivity" />
         <activity
             android:name=".ui.PathFillActivity"
             android:hardwareAccelerated="false" />
         <activity android:name=".ui.PathOPActivity" />
-
         <activity android:name=".ui.WebCallAppActivity2">
             <intent-filter>
-
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="@string/scheme" />
@@ -50,18 +48,17 @@
 
         <receiver android:name=".widget.DesktopWidget">
 
-            <!--这个是桌面小组件的配置文件-->
+            <!-- 这个是桌面小组件的配置文件 -->
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_provider_info" />
 
             <intent-filter>
                 <action android:name="com.customviewcollection.action.CLICK" />
-                <!--以下这个action是作为桌面小组件必须有的。否则小组件不会出现在列表中-->
+                <!-- 以下这个action是作为桌面小组件必须有的。否则小组件不会出现在列表中 -->
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>
