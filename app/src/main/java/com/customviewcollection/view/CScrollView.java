@@ -47,7 +47,7 @@ public class CScrollView extends View {
                             scrollBy(value, value);
                             break;
                         case OFFSET:
-                            // 这个是可以改变View在布局中的位置的。
+                            // 这个是可以改变View在布局中的位置的。移动是基于当前位置进行的
                             // 根据测试发现，最终left = getLeft()等这4个方法的值发生了变化
                             // 同时，因为 x = left + translationX，所以x也随着发生了变化。
                             // 这个方法不会触发重绘
@@ -102,6 +102,9 @@ public class CScrollView extends View {
         mBitmap = BitmapFactory.decodeResource(getResources(),
                 R.mipmap.sishen);
         mScroller = new Scroller(getContext());
+
+        setLayerType(LAYER_TYPE_HARDWARE, null);
+
     }
 
     @Override

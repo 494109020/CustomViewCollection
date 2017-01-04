@@ -17,96 +17,112 @@
             android:id="@+id/btn_custom1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="简单的自定义TextView" />
+            android:text="简单的自定义TextView"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_custom2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RxJava的简单使用" />
+            android:text="RxJava的简单使用"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_custom3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ele购物按钮" />
+            android:text="ele购物按钮"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_custom4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SlackLoadingView" />
+            android:text="SlackLoadingView"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_custom5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="BezierLoadingView" />
+            android:text="BezierLoadingView"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_custom6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Scene的使用" />
+            android:text="Scene的使用"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_custom7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="DynamicProxy的使用" />
+            android:text="DynamicProxy的使用"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_custom8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="网页调起app" />
+            android:text="网页调起app"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_custom9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Matrix学习" />
+            android:text="Matrix学习"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_custom15"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="MatrixPoly" />
+            android:text="MatrixPoly"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_custom10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="画饼图" />
+            android:text="画饼图"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_custom11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Path填充规则学习" />
+            android:text="Path填充规则学习"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_custom12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Path的OP操作学习" />
+            android:text="Path的OP操作学习"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_custom13"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="旋转的箭头" />
+            android:text="旋转的箭头"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_custom14"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SearchView" />
+            android:text="SearchView"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_custom16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="View的移动" />
+            android:text="View的移动"
+            android:textAllCaps="false" />
     </LinearLayout>
 </ScrollView>

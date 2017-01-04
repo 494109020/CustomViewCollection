@@ -51,9 +51,10 @@ public class SearchView extends View {
     }
 
     private void initListener() {
-        mSearchStart = ValueAnimator.ofFloat(0, 1).setDuration(2000);
-        mCircleStart = ValueAnimator.ofFloat(0, 1).setDuration(2000);
-        mSearchEnd = ValueAnimator.ofFloat(1, 0).setDuration(2000);
+        // 这几个数值是为了看起来流畅一些。
+        mSearchStart = ValueAnimator.ofFloat(0.01f, 1).setDuration(2000);
+        mCircleStart = ValueAnimator.ofFloat(0.01f, 1).setDuration(2000);
+        mSearchEnd = ValueAnimator.ofFloat(0.99f, 0).setDuration(2000);
 
         ValueAnimator.AnimatorUpdateListener listener = new ValueAnimator.AnimatorUpdateListener() {
 

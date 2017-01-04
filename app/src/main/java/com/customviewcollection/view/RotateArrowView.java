@@ -17,6 +17,8 @@ import com.customviewcollection.R;
  * Created by Magina on 12/30/16.
  * 类功能介绍: 旋转的箭头
  * 模仿学习：http://gcssloop.com/customview/CustomViewIndex
+ * 这个自定义的view其实正儿八经要做的话可以考虑使用view的旋转动画来做。
+ * 这里主要是用来学习path的一些用法
  */
 
 public class RotateArrowView extends View {
@@ -54,6 +56,11 @@ public class RotateArrowView extends View {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 8;
         bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow, options);
+
+        // 这3行代码还是挺耗性能的。从onDraw(Canvas)中拿出来就好多了。可以自己尝试下
+        mPath.reset();
+        mPath.addCircle(0, 0, 200, Path.Direction.CW);
+        mPathMeasure.setPath(mPath, false);
     }
 
     public RotateArrowView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -71,9 +78,10 @@ public class RotateArrowView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.translate(mWidth / 2, mHeight / 2);
-        mPath.reset();
-        mPath.addCircle(0, 0, 200, Path.Direction.CW);
-        mPathMeasure.setPath(mPath, false);
+//        // 在这里，这3行代码导致性能低。
+//        mPath.reset();
+//        mPath.addCircle(0, 0, 200, Path.Direction.CW);
+//        mPathMeasure.setPath(mPath, false);
 
         // 下面两种方式都能够实现效果。不过第二中代码层面来说更简洁一点。
 
