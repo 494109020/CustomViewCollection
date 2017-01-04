@@ -68,6 +68,12 @@
             android:text="Matrix学习" />
 
         <Button
+            android:id="@+id/btn_custom15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MatrixPoly" />
+
+        <Button
             android:id="@+id/btn_custom10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -96,5 +102,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="SearchView" />
+
+        <Button
+            android:id="@+id/btn_custom16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View的移动" />
     </LinearLayout>
 </ScrollView>

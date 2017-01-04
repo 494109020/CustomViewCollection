@@ -11,24 +11,30 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
-import static com.customviewcollection.view.SearchView.State.SEARCHING;
-
 /**
  * Created by Magina on 12/30/16.
- * 类功能介绍:
+ * 类功能介绍: 一个关于path截取的动画view
+ * 模仿学习：http://gcssloop.com/customview/CustomViewIndex
  */
 
 public class SearchView extends View {
+
+    private static final String TAG = SearchView.class.getSimpleName();
 
     private Path mOutCircle;
     private Path mSearch;
     private Path mDst;
 
     private Paint mDefPaint;
+
     private int mWidth, mHeight;
+
     private PathMeasure mPathMeasure;
+
     private State mState = State.NONE;
+
     private float mCurrentValue;
+
     private ValueAnimator mSearchStart;
     private ValueAnimator mCircleStart;
     private ValueAnimator mSearchEnd;
@@ -73,9 +79,9 @@ public class SearchView extends View {
             @Override
             public void onAnimationEnd(Animator animation) {
                 if (mState == State.START) {
-                    mState = SEARCHING;
+                    mState = State.SEARCHING;
                     mCircleStart.start();
-                } else if (mState == SEARCHING) {
+                } else if (mState == State.SEARCHING) {
                     mState = State.DONE;
                     mSearchEnd.start();
                 } else if (mState == State.DONE) {
@@ -105,7 +111,8 @@ public class SearchView extends View {
         mDefPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
         mDefPaint.setStyle(Paint.Style.STROKE);
         mDefPaint.setColor(0xff000000);
-        mDefPaint.setStrokeWidth(2);
+        mDefPaint.setStrokeWidth(8);
+        mDefPaint.setStrokeCap(Paint.Cap.ROUND);
 
         mSearch = new Path();
         // 注意这里不要360。
@@ -152,13 +159,15 @@ public class SearchView extends View {
             case DONE:
                 mPathMeasure.setPath(mSearch, false);
                 mDst.reset();
+                // 注意： getSegment如果返回false的话，则不会改变mDst。
+                // 最后一个参数的含义：是否移动到截取的起始位置，如果设置为false，则会连接至lastPoint
                 mPathMeasure.getSegment(mPathMeasure.getLength() * mCurrentValue, mPathMeasure.getLength(), mDst, true);
                 canvas.drawPath(mDst, mDefPaint);
                 break;
             case SEARCHING:
                 mPathMeasure.setPath(mOutCircle, false);
                 mDst.reset();
-                mPathMeasure.getSegment(mPathMeasure.getLength() * mCurrentValue - (float) (100 * (0.5 - Math.abs(mCurrentValue - 0.5))), mPathMeasure.getLength() * mCurrentValue, mDst, true);
+                mPathMeasure.getSegment(mPathMeasure.getLength() * mCurrentValue - (float) (200 * (0.5 - Math.abs(mCurrentValue - 0.5))), mPathMeasure.getLength() * mCurrentValue, mDst, true);
                 canvas.drawPath(mDst, mDefPaint);
                 break;
         }
@@ -188,10 +197,10 @@ public class SearchView extends View {
 
     private void cancelAll() {
         mState = State.NONE;
-        // 尼玛，cancel可能会触发onAnimationStart(),onAnimationEnd(),onAnimationCancel()这几个方法
+        // 尼玛，cancel可能会触发onAnimationStart(),onAnimationEnd()。so。注意
         mSearchStart.cancel();
         mSearchEnd.cancel();
         mCircleStart.cancel();
-        invalidate();
+//        invalidate();// 加上这个能使得view显示最初始的状态
     }
 }

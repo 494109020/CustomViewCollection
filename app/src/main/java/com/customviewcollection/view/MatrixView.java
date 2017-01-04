@@ -19,6 +19,7 @@ import com.customviewcollection.R;
  * Created by Magina on 12/14/16.
  * 类功能介绍:
  * 关于Matrix的一点学习。
+ * http://gcssloop.com/customview/CustomViewIndex
  */
 
 public class MatrixView extends View {
@@ -56,12 +57,13 @@ public class MatrixView extends View {
 
         mSrc = new Rect();
 
-        setLayerType(LAYER_TYPE_HARDWARE, null);
+        setLayerType(LAYER_TYPE_NONE, null);
     }
 
     public MatrixView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
+
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -183,5 +185,7 @@ public class MatrixView extends View {
         if (mAnimatorClose.isStarted())
             mAnimatorClose.cancel();
         mAnimatorClose.start();
+        ValueAnimator animator = new ValueAnimator();
+        animator.cancel();
     }
 }

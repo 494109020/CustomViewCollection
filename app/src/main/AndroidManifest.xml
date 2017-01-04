@@ -28,14 +28,20 @@
         <activity android:name=".ui.SecondSceneActivity" />
         <activity android:name=".ui.DynamicProxyActivity" />
         <activity android:name=".ui.WebCallAppActivity1" />
-        <activity android:name=".ui.MatrixActivity" />
+        <activity
+            android:name=".ui.MatrixActivity"
+            android:hardwareAccelerated="true" />
         <activity android:name=".ui.PieViewActivity" />
         <activity android:name=".ui.RotateArrowActivity" />
         <activity android:name=".ui.SearchViewActivity" />
         <activity
             android:name=".ui.PathFillActivity"
             android:hardwareAccelerated="false" />
+        <activity
+            android:name=".ui.MatrixPolyActivity"
+            android:hardwareAccelerated="true" />
         <activity android:name=".ui.PathOPActivity" />
+        <activity android:name=".ui.ScrollActivity" />
         <activity android:name=".ui.WebCallAppActivity2">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

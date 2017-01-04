@@ -16,6 +16,7 @@ import com.customviewcollection.R;
 /**
  * Created by Magina on 12/30/16.
  * 类功能介绍: 旋转的箭头
+ * 模仿学习：http://gcssloop.com/customview/CustomViewIndex
  */
 
 public class RotateArrowView extends View {

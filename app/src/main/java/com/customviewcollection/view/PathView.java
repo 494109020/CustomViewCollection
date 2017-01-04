@@ -10,6 +10,7 @@ import android.view.View;
 /**
  * Created by Magina on 12/28/16.
  * 类功能介绍:Path的学习使用.这个记得要关闭activity的硬件加速。要不然效果可能有偏差
+ * http://gcssloop.com/customview/CustomViewIndex
  */
 
 public class PathView extends View {

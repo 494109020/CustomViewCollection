@@ -9,7 +9,7 @@ import android.view.View;
 
 /**
  * Created by Magina on 12/28/16.
- * 类功能介绍:Path的学习使用
+ * 类功能介绍:Path的学习使用  http://gcssloop.com/customview/CustomViewIndex
  */
 
 public class PathOPView extends View {
