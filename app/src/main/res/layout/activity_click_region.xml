@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="经过测试发现：开启硬件加速和未开启硬件加速的情况下，通过Canvas得到的Matrix的值是不同的，开启硬件加速的情况下，获得的是当前view坐标的Matrix，未开启硬件加速的情况下，获得的是屏幕物理坐标的Matrix。所以，在转换坐标系的时候，如果开启了硬件加速，就应该用event.getX()/event.getY()来进行转换，未开启硬件加速的时候，就应该用event.getRawX()/event.getRawY()来进行坐标转换" />
+
+    <com.customviewcollection.view.ClickRegionView
+        android:id="@+id/crv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

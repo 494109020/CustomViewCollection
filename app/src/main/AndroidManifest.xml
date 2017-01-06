@@ -42,6 +42,9 @@
             android:hardwareAccelerated="true" />
         <activity android:name=".ui.PathOPActivity" />
         <activity android:name=".ui.ScrollActivity" />
+        <activity
+            android:name=".ui.ClickRegionActivity"
+            android:hardwareAccelerated="true" />
         <activity android:name=".ui.WebCallAppActivity2">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

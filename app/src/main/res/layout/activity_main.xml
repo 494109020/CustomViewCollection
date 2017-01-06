@@ -124,5 +124,12 @@
             android:layout_height="wrap_content"
             android:text="View的移动"
             android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_custom17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ClickRegion"
+            android:textAllCaps="false" />
     </LinearLayout>
 </ScrollView>
