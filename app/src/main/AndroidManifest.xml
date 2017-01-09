@@ -45,6 +45,9 @@
         <activity
             android:name=".ui.ClickRegionActivity"
             android:hardwareAccelerated="true" />
+        <activity
+            android:name=".ui.XfermodeActivity"
+            android:hardwareAccelerated="false" />
         <activity android:name=".ui.WebCallAppActivity2">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
