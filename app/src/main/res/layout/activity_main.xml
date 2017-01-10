@@ -138,5 +138,12 @@
             android:layout_height="wrap_content"
             android:text="Xfermode的学习"
             android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_custom19"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="屌"
+            android:textAllCaps="false" />
     </LinearLayout>
 </ScrollView>
