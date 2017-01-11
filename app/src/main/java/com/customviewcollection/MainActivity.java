@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.customviewcollection.ui.BezierLoadingViewActivity;
+import com.customviewcollection.ui.BlurActivity;
 import com.customviewcollection.ui.ClickRegionActivity;
 import com.customviewcollection.ui.CustomTextViewActivity;
 import com.customviewcollection.ui.DiaoActivity;
@@ -29,7 +30,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private View btn_custom1, btn_custom2, btn_custom3,
             btn_custom4, btn_custom5, btn_custom6, btn_custom7, btn_custom8,
             btn_custom9, btn_custom10, btn_custom11, btn_custom12, btn_custom13, btn_custom14,
-            btn_custom15, btn_custom16, btn_custom17, btn_custom18, btn_custom19;
+            btn_custom15, btn_custom16, btn_custom17, btn_custom18, btn_custom19, btn_custom20,
+            btn_custom21;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btn_custom17 = findViewById(R.id.btn_custom17);
         btn_custom18 = findViewById(R.id.btn_custom18);
         btn_custom19 = findViewById(R.id.btn_custom19);
+        btn_custom20 = findViewById(R.id.btn_custom20);
+        btn_custom21 = findViewById(R.id.btn_custom21);
         btn_custom1.setOnClickListener(this);
         btn_custom2.setOnClickListener(this);
         btn_custom3.setOnClickListener(this);
@@ -77,6 +81,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btn_custom17.setOnClickListener(this);
         btn_custom18.setOnClickListener(this);
         btn_custom19.setOnClickListener(this);
+        btn_custom20.setOnClickListener(this);
+        btn_custom21.setOnClickListener(this);
     }
 
     private void start(Class cla) {
@@ -144,6 +150,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_custom19:
                 start(DiaoActivity.class);
+                break;
+            case R.id.btn_custom20:
+                start(BlurActivity.class);
+                break;
+            case R.id.btn_custom21:
                 break;
 
         }

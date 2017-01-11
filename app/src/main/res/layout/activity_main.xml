@@ -145,5 +145,19 @@
             android:layout_height="wrap_content"
             android:text="屌"
             android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_custom20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="BlurMask"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_custom21"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="心电图"
+            android:textAllCaps="false" />
     </LinearLayout>
 </ScrollView>
