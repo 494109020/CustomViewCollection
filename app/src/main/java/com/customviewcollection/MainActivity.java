@@ -13,6 +13,7 @@ import com.customviewcollection.ui.DynamicProxyActivity;
 import com.customviewcollection.ui.LoadingViewActivity;
 import com.customviewcollection.ui.MatrixActivity;
 import com.customviewcollection.ui.MatrixPolyActivity;
+import com.customviewcollection.ui.PageActivity;
 import com.customviewcollection.ui.PathFillActivity;
 import com.customviewcollection.ui.PathOPActivity;
 import com.customviewcollection.ui.PieViewActivity;
@@ -155,6 +156,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 start(BlurActivity.class);
                 break;
             case R.id.btn_custom21:
+                start(PageActivity.class);
                 break;
 
         }

@@ -54,6 +54,9 @@
         <activity
             android:name=".ui.BlurActivity"
             android:hardwareAccelerated="false" />
+        <activity
+            android:name=".ui.PageActivity"
+            android:hardwareAccelerated="true" />
         <activity android:name=".ui.WebCallAppActivity2">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

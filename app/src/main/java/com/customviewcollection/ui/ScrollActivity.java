@@ -3,6 +3,7 @@ package com.customviewcollection.ui;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.Toast;
 
 import com.customviewcollection.BaseActivity;
 import com.customviewcollection.R;
@@ -36,6 +37,12 @@ public class ScrollActivity extends BaseActivity implements View.OnClickListener
 
 
         mCsv = (CScrollView) findViewById(R.id.csv);
+        mCsv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ScrollActivity.this, "点击了", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

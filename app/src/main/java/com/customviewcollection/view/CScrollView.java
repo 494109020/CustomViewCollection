@@ -36,7 +36,8 @@ public class CScrollView extends View {
                             // 这个是基于绝对坐标的View内容的移动
                             // 最终改变的是mScrollX 和 mScrollY的值
                             // 值为正的时候，移动的是负方向。切记
-                            // 会触发重绘。
+                            // 会触发重绘。只是显示的内容位置发生了变化
+                            // 点击区域仍在原始位置
                             scrollTo(value, value);
                             break;
                         case SCROLLBY:
@@ -44,10 +45,12 @@ public class CScrollView extends View {
                             // 最终改变的是mScrollX 和 mScrollY的值
                             // 值为正的时候，移动的是负方向。切记
                             // 会触发重绘。当然，看源码就会发现，他是基于scrollTo的
+                            // 点击区域仍在原始位置
                             scrollBy(value, value);
                             break;
                         case OFFSET:
-                            // 这个是可以改变View在布局中的位置的。移动是基于当前位置进行的
+                            // ＊这个是可以改变View在布局中的位置的＊
+                            // 移动是基于当前位置进行的
                             // 根据测试发现，最终left = getLeft()等这4个方法的值发生了变化
                             // 同时，因为 x = left + translationX，所以x也随着发生了变化。
                             // 这个方法不会触发重绘
@@ -68,6 +71,10 @@ public class CScrollView extends View {
                             // 由于 x = left + translationX
                             // 所以，同时也相当于改变了 x
                             // 这个方法不会触发重绘
+                            // 由于translationX/translationX 是基于当前布局位置的偏移量，
+                            // 可以理解为改变了布局位置。在开启查看布局位置时可以发现，
+                            // 实际的布局位置还是在原处。不过点击区域已经不在原处了。
+                            // 而在实际的内容显示区域
                             setTranslationX(value);
                             setTranslationY(value);
                             break;
@@ -105,6 +112,11 @@ public class CScrollView extends View {
 
         setLayerType(LAYER_TYPE_HARDWARE, null);
 
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        setMeasuredDimension(mBitmap.getWidth(), mBitmap.getHeight());
     }
 
     @Override
