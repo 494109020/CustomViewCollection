@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -61,5 +63,19 @@ public class Utils {
         explicitIntent.setComponent(component);
 
         return explicitIntent;
+    }
+
+    public static void close(Closeable... c) {
+        if (c != null && c.length > 0) {
+            for (Closeable closeable : c) {
+                if (closeable != null) {
+                    try {
+                        closeable.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
     }
 }

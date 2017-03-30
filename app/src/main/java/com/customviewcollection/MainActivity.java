@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.customviewcollection.ui.AptAnnotationActivity;
 import com.customviewcollection.ui.BezierLoadingViewActivity;
+import com.customviewcollection.ui.BlueToothActivity;
 import com.customviewcollection.ui.BlurActivity;
 import com.customviewcollection.ui.ClickRegionActivity;
 import com.customviewcollection.ui.CustomTextViewActivity;
@@ -13,15 +15,19 @@ import com.customviewcollection.ui.DynamicProxyActivity;
 import com.customviewcollection.ui.LoadingViewActivity;
 import com.customviewcollection.ui.MatrixActivity;
 import com.customviewcollection.ui.MatrixPolyActivity;
+import com.customviewcollection.ui.MediaRecordActivity;
 import com.customviewcollection.ui.PageActivity;
 import com.customviewcollection.ui.PathFillActivity;
 import com.customviewcollection.ui.PathOPActivity;
 import com.customviewcollection.ui.PieViewActivity;
+import com.customviewcollection.ui.ProgressWithBtnActivity;
+import com.customviewcollection.ui.PureToneActivity;
 import com.customviewcollection.ui.RotateArrowActivity;
 import com.customviewcollection.ui.RxJavaActivity;
 import com.customviewcollection.ui.SceneActivity;
 import com.customviewcollection.ui.ScrollActivity;
 import com.customviewcollection.ui.SearchViewActivity;
+import com.customviewcollection.ui.ServiceLifeCircleActivity;
 import com.customviewcollection.ui.ShoppingViewActivity;
 import com.customviewcollection.ui.WebCallAppActivity1;
 import com.customviewcollection.ui.XfermodeActivity;
@@ -32,7 +38,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             btn_custom4, btn_custom5, btn_custom6, btn_custom7, btn_custom8,
             btn_custom9, btn_custom10, btn_custom11, btn_custom12, btn_custom13, btn_custom14,
             btn_custom15, btn_custom16, btn_custom17, btn_custom18, btn_custom19, btn_custom20,
-            btn_custom21;
+            btn_custom21, btn_custom22, btn_custom23, btn_custom24, btn_custom25, btn_custom26,
+            btn_custom27;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +71,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btn_custom19 = findViewById(R.id.btn_custom19);
         btn_custom20 = findViewById(R.id.btn_custom20);
         btn_custom21 = findViewById(R.id.btn_custom21);
+        btn_custom22 = findViewById(R.id.btn_custom22);
+        btn_custom23 = findViewById(R.id.btn_custom23);
+        btn_custom24 = findViewById(R.id.btn_custom24);
+        btn_custom25 = findViewById(R.id.btn_custom25);
+        btn_custom26 = findViewById(R.id.btn_custom26);
+        btn_custom27 = findViewById(R.id.btn_custom27);
         btn_custom1.setOnClickListener(this);
         btn_custom2.setOnClickListener(this);
         btn_custom3.setOnClickListener(this);
@@ -84,6 +98,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btn_custom19.setOnClickListener(this);
         btn_custom20.setOnClickListener(this);
         btn_custom21.setOnClickListener(this);
+        btn_custom22.setOnClickListener(this);
+        btn_custom23.setOnClickListener(this);
+        btn_custom24.setOnClickListener(this);
+        btn_custom25.setOnClickListener(this);
+        btn_custom26.setOnClickListener(this);
+        btn_custom27.setOnClickListener(this);
     }
 
     private void start(Class cla) {
@@ -157,6 +177,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_custom21:
                 start(PageActivity.class);
+                break;
+            case R.id.btn_custom22:
+                start(MediaRecordActivity.class);
+                break;
+            case R.id.btn_custom23:
+                start(BlueToothActivity.class);
+                break;
+            case R.id.btn_custom24:
+                start(PureToneActivity.class);
+                break;
+            case R.id.btn_custom25:
+                start(ServiceLifeCircleActivity.class);
+                break;
+            case R.id.btn_custom26:
+                start(ProgressWithBtnActivity.class);
+                break;
+            case R.id.btn_custom27:
+                start(AptAnnotationActivity.class);
                 break;
 
         }

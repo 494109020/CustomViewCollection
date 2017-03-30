@@ -159,5 +159,47 @@
             android:layout_height="wrap_content"
             android:text="翻页效果"
             android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_custom22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="录音机"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_custom23"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="蓝牙"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_custom24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="播放声波"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_custom25"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Service的生命周期"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_custom26"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="带进度条的Button"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_custom27"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="编译期注解"
+            android:textAllCaps="false" />
     </LinearLayout>
 </ScrollView>
